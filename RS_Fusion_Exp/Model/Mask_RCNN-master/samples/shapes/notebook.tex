@@ -1,0 +1,1135 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{train\_shapes}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{mask-r-cnn---train-on-shapes-dataset}{%
+\section{Mask R-CNN - Train on Shapes
+Dataset}\label{mask-r-cnn---train-on-shapes-dataset}}
+
+This notebook shows how to train Mask R-CNN on your own dataset. To keep
+things simple we use a synthetic dataset of shapes (squares, triangles,
+and circles) which enables fast training. You'd still need a GPU,
+though, because the network backbone is a Resnet101, which would be too
+slow to train on a CPU. On a GPU, you can start to get okay-ish results
+in a few minutes, and good results in less than an hour.
+
+The code of the \emph{Shapes} dataset is included below. It generates
+images on the fly, so it doesn't require downloading any data. And it
+can generate images of any size, so we pick a small image size to train
+faster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Root directory of the project}
+        \PY{n}{ROOT\PYZus{}DIR} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{abspath}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Import Mask RCNN}
+        \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ROOT\PYZus{}DIR}\PY{p}{)}  \PY{c+c1}{\PYZsh{} To find local version of the library}
+        \PY{k+kn}{from} \PY{n+nn}{mrcnn}\PY{n+nn}{.}\PY{n+nn}{config} \PY{k}{import} \PY{n}{Config}
+        \PY{k+kn}{from} \PY{n+nn}{mrcnn} \PY{k}{import} \PY{n}{utils}
+        \PY{k+kn}{import} \PY{n+nn}{mrcnn}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{as} \PY{n+nn}{modellib}
+        \PY{k+kn}{from} \PY{n+nn}{mrcnn} \PY{k}{import} \PY{n}{visualize}
+        \PY{k+kn}{from} \PY{n+nn}{mrcnn}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{import} \PY{n}{log}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{c+c1}{\PYZsh{} Directory to save logs and trained model}
+        \PY{n}{MODEL\PYZus{}DIR} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{ROOT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{logs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Local path to trained weights file}
+        \PY{n}{COCO\PYZus{}MODEL\PYZus{}PATH} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{ROOT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mask\PYZus{}rcnn\PYZus{}coco.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Download COCO trained weights from Releases if needed}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{COCO\PYZus{}MODEL\PYZus{}PATH}\PY{p}{)}\PY{p}{:}
+            \PY{n}{utils}\PY{o}{.}\PY{n}{download\PYZus{}trained\PYZus{}weights}\PY{p}{(}\PY{n}{COCO\PYZus{}MODEL\PYZus{}PATH}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \hypertarget{configurations}{%
+\subsection{Configurations}\label{configurations}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{class} \PY{n+nc}{ShapesConfig}\PY{p}{(}\PY{n}{Config}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Configuration for training on the toy shapes dataset.}
+        \PY{l+s+sd}{    Derives from the base Config class and overrides values specific}
+        \PY{l+s+sd}{    to the toy shapes dataset.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Give the configuration a recognizable name}
+            \PY{n}{NAME} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{} Train on 1 GPU and 8 images per GPU. We can put multiple images on each}
+            \PY{c+c1}{\PYZsh{} GPU because the images are small. Batch size is 8 (GPUs * images/GPU).}
+            \PY{n}{GPU\PYZus{}COUNT} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{IMAGES\PYZus{}PER\PYZus{}GPU} \PY{o}{=} \PY{l+m+mi}{8}
+        
+            \PY{c+c1}{\PYZsh{} Number of classes (including background)}
+            \PY{n}{NUM\PYZus{}CLASSES} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{3}  \PY{c+c1}{\PYZsh{} background + 3 shapes}
+        
+            \PY{c+c1}{\PYZsh{} Use small images for faster training. Set the limits of the small side}
+            \PY{c+c1}{\PYZsh{} the large side, and that determines the image shape.}
+            \PY{n}{IMAGE\PYZus{}MIN\PYZus{}DIM} \PY{o}{=} \PY{l+m+mi}{128}
+            \PY{n}{IMAGE\PYZus{}MAX\PYZus{}DIM} \PY{o}{=} \PY{l+m+mi}{128}
+        
+            \PY{c+c1}{\PYZsh{} Use smaller anchors because our image and objects are small}
+            \PY{n}{RPN\PYZus{}ANCHOR\PYZus{}SCALES} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{)}  \PY{c+c1}{\PYZsh{} anchor side in pixels}
+        
+            \PY{c+c1}{\PYZsh{} Reduce training ROIs per image because the images are small and have}
+            \PY{c+c1}{\PYZsh{} few objects. Aim to allow ROI sampling to pick 33\PYZpc{} positive ROIs.}
+            \PY{n}{TRAIN\PYZus{}ROIS\PYZus{}PER\PYZus{}IMAGE} \PY{o}{=} \PY{l+m+mi}{32}
+        
+            \PY{c+c1}{\PYZsh{} Use a small epoch since the data is simple}
+            \PY{n}{STEPS\PYZus{}PER\PYZus{}EPOCH} \PY{o}{=} \PY{l+m+mi}{100}
+        
+            \PY{c+c1}{\PYZsh{} use small validation steps since the epoch is small}
+            \PY{n}{VALIDATION\PYZus{}STEPS} \PY{o}{=} \PY{l+m+mi}{5}
+            
+        \PY{n}{config} \PY{o}{=} \PY{n}{ShapesConfig}\PY{p}{(}\PY{p}{)}
+        \PY{n}{config}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Configurations:
+BACKBONE\_SHAPES                [[32 32]
+ [16 16]
+ [ 8  8]
+ [ 4  4]
+ [ 2  2]]
+BACKBONE\_STRIDES               [4, 8, 16, 32, 64]
+BATCH\_SIZE                     8
+BBOX\_STD\_DEV                   [ 0.1  0.1  0.2  0.2]
+DETECTION\_MAX\_INSTANCES        100
+DETECTION\_MIN\_CONFIDENCE       0.5
+DETECTION\_NMS\_THRESHOLD        0.3
+GPU\_COUNT                      1
+IMAGES\_PER\_GPU                 8
+IMAGE\_MAX\_DIM                  128
+IMAGE\_MIN\_DIM                  128
+IMAGE\_PADDING                  True
+IMAGE\_SHAPE                    [128 128   3]
+LEARNING\_MOMENTUM              0.9
+LEARNING\_RATE                  0.002
+MASK\_POOL\_SIZE                 14
+MASK\_SHAPE                     [28, 28]
+MAX\_GT\_INSTANCES               100
+MEAN\_PIXEL                     [ 123.7  116.8  103.9]
+MINI\_MASK\_SHAPE                (56, 56)
+NAME                           SHAPES
+NUM\_CLASSES                    4
+POOL\_SIZE                      7
+POST\_NMS\_ROIS\_INFERENCE        1000
+POST\_NMS\_ROIS\_TRAINING         2000
+ROI\_POSITIVE\_RATIO             0.33
+RPN\_ANCHOR\_RATIOS              [0.5, 1, 2]
+RPN\_ANCHOR\_SCALES              (8, 16, 32, 64, 128)
+RPN\_ANCHOR\_STRIDE              2
+RPN\_BBOX\_STD\_DEV               [ 0.1  0.1  0.2  0.2]
+RPN\_TRAIN\_ANCHORS\_PER\_IMAGE    256
+STEPS\_PER\_EPOCH                100
+TRAIN\_ROIS\_PER\_IMAGE           32
+USE\_MINI\_MASK                  True
+USE\_RPN\_ROIS                   True
+VALIDATION\_STEPS               50
+WEIGHT\_DECAY                   0.0001
+
+
+
+    \end{Verbatim}
+
+    \hypertarget{notebook-preferences}{%
+\subsection{Notebook Preferences}\label{notebook-preferences}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}ax}\PY{p}{(}\PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cols}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Return a Matplotlib Axes array to be used in}
+        \PY{l+s+sd}{    all visualizations in the notebook. Provide a}
+        \PY{l+s+sd}{    central point to control graph sizes.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Change the default size attribute to control the size}
+        \PY{l+s+sd}{    of rendered images}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{cols}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{size}\PY{o}{*}\PY{n}{cols}\PY{p}{,} \PY{n}{size}\PY{o}{*}\PY{n}{rows}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{ax}
+\end{Verbatim}
+
+    \hypertarget{dataset}{%
+\subsection{Dataset}\label{dataset}}
+
+Create a synthetic dataset
+
+Extend the Dataset class and add a method to load the shapes dataset,
+\texttt{load\_shapes()}, and override the following methods:
+
+\begin{itemize}
+\tightlist
+\item
+  load\_image()
+\item
+  load\_mask()
+\item
+  image\_reference()
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{class} \PY{n+nc}{ShapesDataset}\PY{p}{(}\PY{n}{utils}\PY{o}{.}\PY{n}{Dataset}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Generates the shapes synthetic dataset. The dataset consists of simple}
+        \PY{l+s+sd}{    shapes (triangles, squares, circles) placed randomly on a blank surface.}
+        \PY{l+s+sd}{    The images are generated on the fly. No file access required.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{k}{def} \PY{n+nf}{load\PYZus{}shapes}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{count}\PY{p}{,} \PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Generate the requested number of synthetic images.}
+        \PY{l+s+sd}{        count: number of images to generate.}
+        \PY{l+s+sd}{        height, width: the size of the generated images.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} Add classes}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}class}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{square}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}class}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{circle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}class}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{triangle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Add images}
+                \PY{c+c1}{\PYZsh{} Generate random specifications of images (i.e. color and}
+                \PY{c+c1}{\PYZsh{} list of shapes sizes and locations). This is more compact than}
+                \PY{c+c1}{\PYZsh{} actual images. Images are generated on the fly in load\PYZus{}image().}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{count}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{bg\PYZus{}color}\PY{p}{,} \PY{n}{shapes} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{random\PYZus{}image}\PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}id}\PY{o}{=}\PY{n}{i}\PY{p}{,} \PY{n}{path}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                   \PY{n}{width}\PY{o}{=}\PY{n}{width}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{n}{height}\PY{p}{,}
+                                   \PY{n}{bg\PYZus{}color}\PY{o}{=}\PY{n}{bg\PYZus{}color}\PY{p}{,} \PY{n}{shapes}\PY{o}{=}\PY{n}{shapes}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{load\PYZus{}image}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{image\PYZus{}id}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Generate an image from the specs of the given image ID.}
+        \PY{l+s+sd}{        Typically this function loads the image from a file, but}
+        \PY{l+s+sd}{        in this case it generates the image on the fly from the}
+        \PY{l+s+sd}{        specs in image\PYZus{}info.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{info} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}info}\PY{p}{[}\PY{n}{image\PYZus{}id}\PY{p}{]}
+                \PY{n}{bg\PYZus{}color} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bg\PYZus{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                \PY{n}{image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+                \PY{n}{image} \PY{o}{=} \PY{n}{image} \PY{o}{*} \PY{n}{bg\PYZus{}color}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+                \PY{k}{for} \PY{n}{shape}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{n}{dims} \PY{o+ow}{in} \PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shapes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                    \PY{n}{image} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{draw\PYZus{}shape}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{shape}\PY{p}{,} \PY{n}{dims}\PY{p}{,} \PY{n}{color}\PY{p}{)}
+                \PY{k}{return} \PY{n}{image}
+        
+            \PY{k}{def} \PY{n+nf}{image\PYZus{}reference}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{image\PYZus{}id}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Return the shapes data of the image.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{info} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}info}\PY{p}{[}\PY{n}{image\PYZus{}id}\PY{p}{]}
+                \PY{k}{if} \PY{n}{info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{source}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                    \PY{k}{return} \PY{n}{info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shapes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb}{super}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{p}{)}\PY{o}{.}\PY{n}{image\PYZus{}reference}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{image\PYZus{}id}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{load\PYZus{}mask}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{image\PYZus{}id}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Generate instance masks for shapes of the given image ID.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{info} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}info}\PY{p}{[}\PY{n}{image\PYZus{}id}\PY{p}{]}
+                \PY{n}{shapes} \PY{o}{=} \PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shapes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{count} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{shapes}\PY{p}{)}
+                \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{count}\PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{dims}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{info}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shapes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{draw\PYZus{}shape}\PY{p}{(}\PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                                        \PY{n}{shape}\PY{p}{,} \PY{n}{dims}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Handle occlusions}
+                \PY{n}{occlusion} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{count}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{occlusion}
+                    \PY{n}{occlusion} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{occlusion}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Map class names to class IDs.}
+                \PY{n}{class\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{class\PYZus{}names}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{s}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{shapes}\PY{p}{]}\PY{p}{)}
+                \PY{k}{return} \PY{n}{mask}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}\PY{p}{,} \PY{n}{class\PYZus{}ids}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{draw\PYZus{}shape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{image}\PY{p}{,} \PY{n}{shape}\PY{p}{,} \PY{n}{dims}\PY{p}{,} \PY{n}{color}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Draws a shape from the given specs.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} Get the center x, y and the size s}
+                \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{n}{dims}
+                \PY{k}{if} \PY{n}{shape} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{square}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{cv2}\PY{o}{.}\PY{n}{rectangle}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{p}{,} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{n}{s}\PY{p}{,} \PY{n}{y}\PY{o}{+}\PY{n}{s}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{shape} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{circle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                    \PY{n}{cv2}\PY{o}{.}\PY{n}{circle}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{s}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{shape} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{triangle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                    \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{p}{)}\PY{p}{,}
+                                        \PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{o}{/}\PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{y}\PY{o}{+}\PY{n}{s}\PY{p}{)}\PY{p}{,}
+                                        \PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{n}{s}\PY{o}{/}\PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{y}\PY{o}{+}\PY{n}{s}\PY{p}{)}\PY{p}{,}
+                                        \PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                    \PY{n}{cv2}\PY{o}{.}\PY{n}{fillPoly}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{points}\PY{p}{,} \PY{n}{color}\PY{p}{)}
+                \PY{k}{return} \PY{n}{image}
+        
+            \PY{k}{def} \PY{n+nf}{random\PYZus{}shape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Generates specifications of a random shape that lies within}
+        \PY{l+s+sd}{        the given height and width boundaries.}
+        \PY{l+s+sd}{        Returns a tuple of three valus:}
+        \PY{l+s+sd}{        * The shape name (square, circle, ...)}
+        \PY{l+s+sd}{        * Shape color: a tuple of 3 values, RGB.}
+        \PY{l+s+sd}{        * Shape dimensions: A tuple of values that define the shape size}
+        \PY{l+s+sd}{                            and location. Differs per shape type.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} Shape}
+                \PY{n}{shape} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{square}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{circle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{triangle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Color}
+                \PY{n}{color} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Center x, y}
+                \PY{n}{buffer} \PY{o}{=} \PY{l+m+mi}{20}
+                \PY{n}{y} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{buffer}\PY{p}{,} \PY{n}{height} \PY{o}{\PYZhy{}} \PY{n}{buffer} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{buffer}\PY{p}{,} \PY{n}{width} \PY{o}{\PYZhy{}} \PY{n}{buffer} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Size}
+                \PY{n}{s} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{buffer}\PY{p}{,} \PY{n}{height}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+                \PY{k}{return} \PY{n}{shape}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{s}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{random\PYZus{}image}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Creates random specifications of an image with multiple shapes.}
+        \PY{l+s+sd}{        Returns the background color of the image and a list of shape}
+        \PY{l+s+sd}{        specifications that can be used to draw the image.}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} Pick random background color}
+                \PY{n}{bg\PYZus{}color} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Generate a few random shapes and record their}
+                \PY{c+c1}{\PYZsh{} bounding boxes}
+                \PY{n}{shapes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{boxes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{N} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+                \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{shape}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{n}{dims} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{random\PYZus{}shape}\PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+                    \PY{n}{shapes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{n}{dims}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{n}{dims}
+                    \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{p}{,} \PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{s}\PY{p}{,} \PY{n}{y}\PY{o}{+}\PY{n}{s}\PY{p}{,} \PY{n}{x}\PY{o}{+}\PY{n}{s}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Apply non\PYZhy{}max suppression wit 0.3 threshold to avoid}
+                \PY{c+c1}{\PYZsh{} shapes covering each other}
+                \PY{n}{keep\PYZus{}ixs} \PY{o}{=} \PY{n}{utils}\PY{o}{.}\PY{n}{non\PYZus{}max\PYZus{}suppression}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{boxes}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{)}
+                \PY{n}{shapes} \PY{o}{=} \PY{p}{[}\PY{n}{s} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{shapes}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{keep\PYZus{}ixs}\PY{p}{]}
+                \PY{k}{return} \PY{n}{bg\PYZus{}color}\PY{p}{,} \PY{n}{shapes}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Training dataset}
+        \PY{n}{dataset\PYZus{}train} \PY{o}{=} \PY{n}{ShapesDataset}\PY{p}{(}\PY{p}{)}
+        \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{load\PYZus{}shapes}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{IMAGE\PYZus{}SHAPE}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{IMAGE\PYZus{}SHAPE}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{prepare}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Validation dataset}
+        \PY{n}{dataset\PYZus{}val} \PY{o}{=} \PY{n}{ShapesDataset}\PY{p}{(}\PY{p}{)}
+        \PY{n}{dataset\PYZus{}val}\PY{o}{.}\PY{n}{load\PYZus{}shapes}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{IMAGE\PYZus{}SHAPE}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{IMAGE\PYZus{}SHAPE}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{dataset\PYZus{}val}\PY{o}{.}\PY{n}{prepare}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Load and display random samples}
+        \PY{n}{image\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{image\PYZus{}ids}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+        \PY{k}{for} \PY{n}{image\PYZus{}id} \PY{o+ow}{in} \PY{n}{image\PYZus{}ids}\PY{p}{:}
+            \PY{n}{image} \PY{o}{=} \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{load\PYZus{}image}\PY{p}{(}\PY{n}{image\PYZus{}id}\PY{p}{)}
+            \PY{n}{mask}\PY{p}{,} \PY{n}{class\PYZus{}ids} \PY{o}{=} \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{load\PYZus{}mask}\PY{p}{(}\PY{n}{image\PYZus{}id}\PY{p}{)}
+            \PY{n}{visualize}\PY{o}{.}\PY{n}{display\PYZus{}top\PYZus{}masks}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{mask}\PY{p}{,} \PY{n}{class\PYZus{}ids}\PY{p}{,} \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{class\PYZus{}names}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ceate-model}{%
+\subsection{Ceate Model}\label{ceate-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Create model in training mode}
+        \PY{n}{model} \PY{o}{=} \PY{n}{modellib}\PY{o}{.}\PY{n}{MaskRCNN}\PY{p}{(}\PY{n}{mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{training}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{config}\PY{o}{=}\PY{n}{config}\PY{p}{,}
+                                  \PY{n}{model\PYZus{}dir}\PY{o}{=}\PY{n}{MODEL\PYZus{}DIR}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Which weights to start with?}
+        \PY{n}{init\PYZus{}with} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coco}\PY{l+s+s2}{\PYZdq{}}  \PY{c+c1}{\PYZsh{} imagenet, coco, or last}
+        
+        \PY{k}{if} \PY{n}{init\PYZus{}with} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{imagenet}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+            \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{get\PYZus{}imagenet\PYZus{}weights}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{by\PYZus{}name}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{k}{elif} \PY{n}{init\PYZus{}with} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coco}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Load weights trained on MS COCO, but skip layers that}
+            \PY{c+c1}{\PYZsh{} are different due to the different number of classes}
+            \PY{c+c1}{\PYZsh{} See README for instructions to download the COCO weights}
+            \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{COCO\PYZus{}MODEL\PYZus{}PATH}\PY{p}{,} \PY{n}{by\PYZus{}name}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                               \PY{n}{exclude}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mrcnn\PYZus{}class\PYZus{}logits}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mrcnn\PYZus{}bbox\PYZus{}fc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mrcnn\PYZus{}bbox}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mrcnn\PYZus{}mask}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{k}{elif} \PY{n}{init\PYZus{}with} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Load the last model you trained and continue training}
+            \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{find\PYZus{}last}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{by\PYZus{}name}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{training}{%
+\subsection{Training}\label{training}}
+
+Train in two stages: 1. Only the heads. Here we're freezing all the
+backbone layers and training only the randomly initialized layers
+(i.e.~the ones that we didn't use pre-trained weights from MS COCO). To
+train only the head layers, pass
+\texttt{layers=\textquotesingle{}heads\textquotesingle{}} to the
+\texttt{train()} function.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Fine-tune all layers. For this simple example it's not necessary, but
+  we're including it to show the process. Simply pass
+  \texttt{layers="all} to train all layers.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Train the head branches}
+        \PY{c+c1}{\PYZsh{} Passing layers=\PYZdq{}heads\PYZdq{} freezes all layers except the head}
+        \PY{c+c1}{\PYZsh{} layers. You can also pass a regular expression to select}
+        \PY{c+c1}{\PYZsh{} which layers to train by name pattern.}
+        \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{dataset\PYZus{}train}\PY{p}{,} \PY{n}{dataset\PYZus{}val}\PY{p}{,} 
+                    \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{config}\PY{o}{.}\PY{n}{LEARNING\PYZus{}RATE}\PY{p}{,} 
+                    \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} 
+                    \PY{n}{layers}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{heads}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Checkpoint Path:  /deepmatter/mask\_rcnn/logs/shapes2017102802/mask\_rcnn\_\{epoch:04d\}.h5
+Starting at epoch 0. LR=0.002
+
+Selecting layers to train
+fpn\_c5p5               (Conv2D)
+fpn\_c4p4               (Conv2D)
+fpn\_c3p3               (Conv2D)
+fpn\_c2p2               (Conv2D)
+fpn\_p5                 (Conv2D)
+fpn\_p2                 (Conv2D)
+fpn\_p3                 (Conv2D)
+fpn\_p4                 (Conv2D)
+In model:  rpn\_model
+    rpn\_conv\_shared        (Conv2D)
+    rpn\_class\_raw          (Conv2D)
+    rpn\_bbox\_pred          (Conv2D)
+mrcnn\_mask\_conv1       (TimeDistributed)
+mrcnn\_mask\_bn1         (TimeDistributed)
+mrcnn\_mask\_conv2       (TimeDistributed)
+mrcnn\_mask\_bn2         (TimeDistributed)
+mrcnn\_class\_conv1      (TimeDistributed)
+mrcnn\_class\_bn1        (TimeDistributed)
+mrcnn\_mask\_conv3       (TimeDistributed)
+mrcnn\_mask\_bn3         (TimeDistributed)
+mrcnn\_class\_conv2      (TimeDistributed)
+mrcnn\_class\_bn2        (TimeDistributed)
+mrcnn\_mask\_conv4       (TimeDistributed)
+mrcnn\_mask\_bn4         (TimeDistributed)
+mrcnn\_bbox\_fc          (TimeDistributed)
+mrcnn\_mask\_deconv      (TimeDistributed)
+mrcnn\_class\_logits     (TimeDistributed)
+mrcnn\_mask             (TimeDistributed)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.5/dist-packages/tensorflow/python/ops/gradients\_impl.py:95: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+/usr/local/lib/python3.5/dist-packages/keras/engine/training.py:1987: UserWarning: Using a generator with `use\_multiprocessing=True` and multiple workers may duplicate your data. Please consider using the`keras.utils.Sequence class.
+  UserWarning('Using a generator with `use\_multiprocessing=True`'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/1
+100/100 [==============================] - 73s - loss: 2.2164 - rpn\_class\_loss: 0.0242 - rpn\_bbox\_loss: 1.0638 - mrcnn\_class\_loss: 0.2426 - mrcnn\_bbox\_loss: 0.3006 - mrcnn\_mask\_loss: 0.2385 - val\_loss: 1.8454 - val\_rpn\_class\_loss: 0.0232 - val\_rpn\_bbox\_loss: 0.9971 - val\_mrcnn\_class\_loss: 0.1398 - val\_mrcnn\_bbox\_loss: 0.1343 - val\_mrcnn\_mask\_loss: 0.2042
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Fine tune all layers}
+        \PY{c+c1}{\PYZsh{} Passing layers=\PYZdq{}all\PYZdq{} trains all layers. You can also }
+        \PY{c+c1}{\PYZsh{} pass a regular expression to select which layers to}
+        \PY{c+c1}{\PYZsh{} train by name pattern.}
+        \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{dataset\PYZus{}train}\PY{p}{,} \PY{n}{dataset\PYZus{}val}\PY{p}{,} 
+                    \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{config}\PY{o}{.}\PY{n}{LEARNING\PYZus{}RATE} \PY{o}{/} \PY{l+m+mi}{10}\PY{p}{,}
+                    \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                    \PY{n}{layers}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Checkpoint Path:  /deepmatter/mask\_rcnn/logs/shapes2017102802/mask\_rcnn\_\{epoch:04d\}.h5
+Starting at epoch 0. LR=0.0002
+
+Selecting layers to train
+conv1                  (Conv2D)
+bn\_conv1               (BatchNorm)
+res2a\_branch2a         (Conv2D)
+bn2a\_branch2a          (BatchNorm)
+res2a\_branch2b         (Conv2D)
+bn2a\_branch2b          (BatchNorm)
+res2a\_branch2c         (Conv2D)
+res2a\_branch1          (Conv2D)
+bn2a\_branch2c          (BatchNorm)
+bn2a\_branch1           (BatchNorm)
+res2b\_branch2a         (Conv2D)
+bn2b\_branch2a          (BatchNorm)
+res2b\_branch2b         (Conv2D)
+bn2b\_branch2b          (BatchNorm)
+res2b\_branch2c         (Conv2D)
+bn2b\_branch2c          (BatchNorm)
+res2c\_branch2a         (Conv2D)
+bn2c\_branch2a          (BatchNorm)
+res2c\_branch2b         (Conv2D)
+bn2c\_branch2b          (BatchNorm)
+res2c\_branch2c         (Conv2D)
+bn2c\_branch2c          (BatchNorm)
+res3a\_branch2a         (Conv2D)
+bn3a\_branch2a          (BatchNorm)
+res3a\_branch2b         (Conv2D)
+bn3a\_branch2b          (BatchNorm)
+res3a\_branch2c         (Conv2D)
+res3a\_branch1          (Conv2D)
+bn3a\_branch2c          (BatchNorm)
+bn3a\_branch1           (BatchNorm)
+res3b\_branch2a         (Conv2D)
+bn3b\_branch2a          (BatchNorm)
+res3b\_branch2b         (Conv2D)
+bn3b\_branch2b          (BatchNorm)
+res3b\_branch2c         (Conv2D)
+bn3b\_branch2c          (BatchNorm)
+res3c\_branch2a         (Conv2D)
+bn3c\_branch2a          (BatchNorm)
+res3c\_branch2b         (Conv2D)
+bn3c\_branch2b          (BatchNorm)
+res3c\_branch2c         (Conv2D)
+bn3c\_branch2c          (BatchNorm)
+res3d\_branch2a         (Conv2D)
+bn3d\_branch2a          (BatchNorm)
+res3d\_branch2b         (Conv2D)
+bn3d\_branch2b          (BatchNorm)
+res3d\_branch2c         (Conv2D)
+bn3d\_branch2c          (BatchNorm)
+res4a\_branch2a         (Conv2D)
+bn4a\_branch2a          (BatchNorm)
+res4a\_branch2b         (Conv2D)
+bn4a\_branch2b          (BatchNorm)
+res4a\_branch2c         (Conv2D)
+res4a\_branch1          (Conv2D)
+bn4a\_branch2c          (BatchNorm)
+bn4a\_branch1           (BatchNorm)
+res4b\_branch2a         (Conv2D)
+bn4b\_branch2a          (BatchNorm)
+res4b\_branch2b         (Conv2D)
+bn4b\_branch2b          (BatchNorm)
+res4b\_branch2c         (Conv2D)
+bn4b\_branch2c          (BatchNorm)
+res4c\_branch2a         (Conv2D)
+bn4c\_branch2a          (BatchNorm)
+res4c\_branch2b         (Conv2D)
+bn4c\_branch2b          (BatchNorm)
+res4c\_branch2c         (Conv2D)
+bn4c\_branch2c          (BatchNorm)
+res4d\_branch2a         (Conv2D)
+bn4d\_branch2a          (BatchNorm)
+res4d\_branch2b         (Conv2D)
+bn4d\_branch2b          (BatchNorm)
+res4d\_branch2c         (Conv2D)
+bn4d\_branch2c          (BatchNorm)
+res4e\_branch2a         (Conv2D)
+bn4e\_branch2a          (BatchNorm)
+res4e\_branch2b         (Conv2D)
+bn4e\_branch2b          (BatchNorm)
+res4e\_branch2c         (Conv2D)
+bn4e\_branch2c          (BatchNorm)
+res4f\_branch2a         (Conv2D)
+bn4f\_branch2a          (BatchNorm)
+res4f\_branch2b         (Conv2D)
+bn4f\_branch2b          (BatchNorm)
+res4f\_branch2c         (Conv2D)
+bn4f\_branch2c          (BatchNorm)
+res4g\_branch2a         (Conv2D)
+bn4g\_branch2a          (BatchNorm)
+res4g\_branch2b         (Conv2D)
+bn4g\_branch2b          (BatchNorm)
+res4g\_branch2c         (Conv2D)
+bn4g\_branch2c          (BatchNorm)
+res4h\_branch2a         (Conv2D)
+bn4h\_branch2a          (BatchNorm)
+res4h\_branch2b         (Conv2D)
+bn4h\_branch2b          (BatchNorm)
+res4h\_branch2c         (Conv2D)
+bn4h\_branch2c          (BatchNorm)
+res4i\_branch2a         (Conv2D)
+bn4i\_branch2a          (BatchNorm)
+res4i\_branch2b         (Conv2D)
+bn4i\_branch2b          (BatchNorm)
+res4i\_branch2c         (Conv2D)
+bn4i\_branch2c          (BatchNorm)
+res4j\_branch2a         (Conv2D)
+bn4j\_branch2a          (BatchNorm)
+res4j\_branch2b         (Conv2D)
+bn4j\_branch2b          (BatchNorm)
+res4j\_branch2c         (Conv2D)
+bn4j\_branch2c          (BatchNorm)
+res4k\_branch2a         (Conv2D)
+bn4k\_branch2a          (BatchNorm)
+res4k\_branch2b         (Conv2D)
+bn4k\_branch2b          (BatchNorm)
+res4k\_branch2c         (Conv2D)
+bn4k\_branch2c          (BatchNorm)
+res4l\_branch2a         (Conv2D)
+bn4l\_branch2a          (BatchNorm)
+res4l\_branch2b         (Conv2D)
+bn4l\_branch2b          (BatchNorm)
+res4l\_branch2c         (Conv2D)
+bn4l\_branch2c          (BatchNorm)
+res4m\_branch2a         (Conv2D)
+bn4m\_branch2a          (BatchNorm)
+res4m\_branch2b         (Conv2D)
+bn4m\_branch2b          (BatchNorm)
+res4m\_branch2c         (Conv2D)
+bn4m\_branch2c          (BatchNorm)
+res4n\_branch2a         (Conv2D)
+bn4n\_branch2a          (BatchNorm)
+res4n\_branch2b         (Conv2D)
+bn4n\_branch2b          (BatchNorm)
+res4n\_branch2c         (Conv2D)
+bn4n\_branch2c          (BatchNorm)
+res4o\_branch2a         (Conv2D)
+bn4o\_branch2a          (BatchNorm)
+res4o\_branch2b         (Conv2D)
+bn4o\_branch2b          (BatchNorm)
+res4o\_branch2c         (Conv2D)
+bn4o\_branch2c          (BatchNorm)
+res4p\_branch2a         (Conv2D)
+bn4p\_branch2a          (BatchNorm)
+res4p\_branch2b         (Conv2D)
+bn4p\_branch2b          (BatchNorm)
+res4p\_branch2c         (Conv2D)
+bn4p\_branch2c          (BatchNorm)
+res4q\_branch2a         (Conv2D)
+bn4q\_branch2a          (BatchNorm)
+res4q\_branch2b         (Conv2D)
+bn4q\_branch2b          (BatchNorm)
+res4q\_branch2c         (Conv2D)
+bn4q\_branch2c          (BatchNorm)
+res4r\_branch2a         (Conv2D)
+bn4r\_branch2a          (BatchNorm)
+res4r\_branch2b         (Conv2D)
+bn4r\_branch2b          (BatchNorm)
+res4r\_branch2c         (Conv2D)
+bn4r\_branch2c          (BatchNorm)
+res4s\_branch2a         (Conv2D)
+bn4s\_branch2a          (BatchNorm)
+res4s\_branch2b         (Conv2D)
+bn4s\_branch2b          (BatchNorm)
+res4s\_branch2c         (Conv2D)
+bn4s\_branch2c          (BatchNorm)
+res4t\_branch2a         (Conv2D)
+bn4t\_branch2a          (BatchNorm)
+res4t\_branch2b         (Conv2D)
+bn4t\_branch2b          (BatchNorm)
+res4t\_branch2c         (Conv2D)
+bn4t\_branch2c          (BatchNorm)
+res4u\_branch2a         (Conv2D)
+bn4u\_branch2a          (BatchNorm)
+res4u\_branch2b         (Conv2D)
+bn4u\_branch2b          (BatchNorm)
+res4u\_branch2c         (Conv2D)
+bn4u\_branch2c          (BatchNorm)
+res4v\_branch2a         (Conv2D)
+bn4v\_branch2a          (BatchNorm)
+res4v\_branch2b         (Conv2D)
+bn4v\_branch2b          (BatchNorm)
+res4v\_branch2c         (Conv2D)
+bn4v\_branch2c          (BatchNorm)
+res4w\_branch2a         (Conv2D)
+bn4w\_branch2a          (BatchNorm)
+res4w\_branch2b         (Conv2D)
+bn4w\_branch2b          (BatchNorm)
+res4w\_branch2c         (Conv2D)
+bn4w\_branch2c          (BatchNorm)
+res5a\_branch2a         (Conv2D)
+bn5a\_branch2a          (BatchNorm)
+res5a\_branch2b         (Conv2D)
+bn5a\_branch2b          (BatchNorm)
+res5a\_branch2c         (Conv2D)
+res5a\_branch1          (Conv2D)
+bn5a\_branch2c          (BatchNorm)
+bn5a\_branch1           (BatchNorm)
+res5b\_branch2a         (Conv2D)
+bn5b\_branch2a          (BatchNorm)
+res5b\_branch2b         (Conv2D)
+bn5b\_branch2b          (BatchNorm)
+res5b\_branch2c         (Conv2D)
+bn5b\_branch2c          (BatchNorm)
+res5c\_branch2a         (Conv2D)
+bn5c\_branch2a          (BatchNorm)
+res5c\_branch2b         (Conv2D)
+bn5c\_branch2b          (BatchNorm)
+res5c\_branch2c         (Conv2D)
+bn5c\_branch2c          (BatchNorm)
+fpn\_c5p5               (Conv2D)
+fpn\_c4p4               (Conv2D)
+fpn\_c3p3               (Conv2D)
+fpn\_c2p2               (Conv2D)
+fpn\_p5                 (Conv2D)
+fpn\_p2                 (Conv2D)
+fpn\_p3                 (Conv2D)
+fpn\_p4                 (Conv2D)
+In model:  rpn\_model
+    rpn\_conv\_shared        (Conv2D)
+    rpn\_class\_raw          (Conv2D)
+    rpn\_bbox\_pred          (Conv2D)
+mrcnn\_mask\_conv1       (TimeDistributed)
+mrcnn\_mask\_bn1         (TimeDistributed)
+mrcnn\_mask\_conv2       (TimeDistributed)
+mrcnn\_mask\_bn2         (TimeDistributed)
+mrcnn\_class\_conv1      (TimeDistributed)
+mrcnn\_class\_bn1        (TimeDistributed)
+mrcnn\_mask\_conv3       (TimeDistributed)
+mrcnn\_mask\_bn3         (TimeDistributed)
+mrcnn\_class\_conv2      (TimeDistributed)
+mrcnn\_class\_bn2        (TimeDistributed)
+mrcnn\_mask\_conv4       (TimeDistributed)
+mrcnn\_mask\_bn4         (TimeDistributed)
+mrcnn\_bbox\_fc          (TimeDistributed)
+mrcnn\_mask\_deconv      (TimeDistributed)
+mrcnn\_class\_logits     (TimeDistributed)
+mrcnn\_mask             (TimeDistributed)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.5/dist-packages/tensorflow/python/ops/gradients\_impl.py:95: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+/usr/local/lib/python3.5/dist-packages/keras/engine/training.py:1987: UserWarning: Using a generator with `use\_multiprocessing=True` and multiple workers may duplicate your data. Please consider using the`keras.utils.Sequence class.
+  UserWarning('Using a generator with `use\_multiprocessing=True`'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/1
+100/100 [==============================] - 86s - loss: 11.4006 - rpn\_class\_loss: 0.0184 - rpn\_bbox\_loss: 0.8409 - mrcnn\_class\_loss: 0.1576 - mrcnn\_bbox\_loss: 0.0902 - mrcnn\_mask\_loss: 0.1977 - val\_loss: 11.4376 - val\_rpn\_class\_loss: 0.0220 - val\_rpn\_bbox\_loss: 1.0068 - val\_mrcnn\_class\_loss: 0.1172 - val\_mrcnn\_bbox\_loss: 0.0683 - val\_mrcnn\_mask\_loss: 0.1278
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Save weights}
+         \PY{c+c1}{\PYZsh{} Typically not needed because callbacks save after every epoch}
+         \PY{c+c1}{\PYZsh{} Uncomment to save manually}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}path = os.path.join(MODEL\PYZus{}DIR, \PYZdq{}mask\PYZus{}rcnn\PYZus{}shapes.h5\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} model.keras\PYZus{}model.save\PYZus{}weights(model\PYZus{}path)}
+\end{Verbatim}
+
+    \hypertarget{detection}{%
+\subsection{Detection}\label{detection}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{class} \PY{n+nc}{InferenceConfig}\PY{p}{(}\PY{n}{ShapesConfig}\PY{p}{)}\PY{p}{:}
+             \PY{n}{GPU\PYZus{}COUNT} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{IMAGES\PYZus{}PER\PYZus{}GPU} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{inference\PYZus{}config} \PY{o}{=} \PY{n}{InferenceConfig}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Recreate the model in inference mode}
+         \PY{n}{model} \PY{o}{=} \PY{n}{modellib}\PY{o}{.}\PY{n}{MaskRCNN}\PY{p}{(}\PY{n}{mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inference}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                   \PY{n}{config}\PY{o}{=}\PY{n}{inference\PYZus{}config}\PY{p}{,}
+                                   \PY{n}{model\PYZus{}dir}\PY{o}{=}\PY{n}{MODEL\PYZus{}DIR}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get path to saved weights}
+         \PY{c+c1}{\PYZsh{} Either set a specific path or find last trained weights}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}path = os.path.join(ROOT\PYZus{}DIR, \PYZdq{}.h5 file name here\PYZdq{})}
+         \PY{n}{model\PYZus{}path} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{find\PYZus{}last}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Load trained weights}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Loading weights from }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model\PYZus{}path}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{model\PYZus{}path}\PY{p}{,} \PY{n}{by\PYZus{}name}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Test on a random image}
+         \PY{n}{image\PYZus{}id} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{dataset\PYZus{}val}\PY{o}{.}\PY{n}{image\PYZus{}ids}\PY{p}{)}
+         \PY{n}{original\PYZus{}image}\PY{p}{,} \PY{n}{image\PYZus{}meta}\PY{p}{,} \PY{n}{gt\PYZus{}class\PYZus{}id}\PY{p}{,} \PY{n}{gt\PYZus{}bbox}\PY{p}{,} \PY{n}{gt\PYZus{}mask} \PY{o}{=}\PYZbs{}
+             \PY{n}{modellib}\PY{o}{.}\PY{n}{load\PYZus{}image\PYZus{}gt}\PY{p}{(}\PY{n}{dataset\PYZus{}val}\PY{p}{,} \PY{n}{inference\PYZus{}config}\PY{p}{,} 
+                                    \PY{n}{image\PYZus{}id}\PY{p}{,} \PY{n}{use\PYZus{}mini\PYZus{}mask}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original\PYZus{}image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{original\PYZus{}image}\PY{p}{)}
+         \PY{n}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image\PYZus{}meta}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}meta}\PY{p}{)}
+         \PY{n}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gt\PYZus{}class\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{gt\PYZus{}class\PYZus{}id}\PY{p}{)}
+         \PY{n}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gt\PYZus{}bbox}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{gt\PYZus{}bbox}\PY{p}{)}
+         \PY{n}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gt\PYZus{}mask}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{gt\PYZus{}mask}\PY{p}{)}
+         
+         \PY{n}{visualize}\PY{o}{.}\PY{n}{display\PYZus{}instances}\PY{p}{(}\PY{n}{original\PYZus{}image}\PY{p}{,} \PY{n}{gt\PYZus{}bbox}\PY{p}{,} \PY{n}{gt\PYZus{}mask}\PY{p}{,} \PY{n}{gt\PYZus{}class\PYZus{}id}\PY{p}{,} 
+                                     \PY{n}{dataset\PYZus{}train}\PY{o}{.}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+original\_image           shape: (128, 128, 3)         min:  108.00000  max:  236.00000
+image\_meta               shape: (12,)                 min:    0.00000  max:  128.00000
+gt\_bbox                  shape: (2, 5)                min:    2.00000  max:  102.00000
+gt\_mask                  shape: (128, 128, 2)         min:    0.00000  max:    1.00000
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{results} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{detect}\PY{p}{(}\PY{p}{[}\PY{n}{original\PYZus{}image}\PY{p}{]}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{r} \PY{o}{=} \PY{n}{results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{visualize}\PY{o}{.}\PY{n}{display\PYZus{}instances}\PY{p}{(}\PY{n}{original\PYZus{}image}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rois}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{masks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class\PYZus{}ids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                     \PY{n}{dataset\PYZus{}val}\PY{o}{.}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{get\PYZus{}ax}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Processing 1 images
+image                    shape: (128, 128, 3)         min:  108.00000  max:  236.00000
+molded\_images            shape: (1, 128, 128, 3)      min:  -15.70000  max:  132.10000
+image\_metas              shape: (1, 12)               min:    0.00000  max:  128.00000
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{evaluation}{%
+\subsection{Evaluation}\label{evaluation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Compute VOC\PYZhy{}Style mAP @ IoU=0.5}
+         \PY{c+c1}{\PYZsh{} Running on 10 images. Increase for better accuracy.}
+         \PY{n}{image\PYZus{}ids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{dataset\PYZus{}val}\PY{o}{.}\PY{n}{image\PYZus{}ids}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{APs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{image\PYZus{}id} \PY{o+ow}{in} \PY{n}{image\PYZus{}ids}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Load image and ground truth data}
+             \PY{n}{image}\PY{p}{,} \PY{n}{image\PYZus{}meta}\PY{p}{,} \PY{n}{gt\PYZus{}class\PYZus{}id}\PY{p}{,} \PY{n}{gt\PYZus{}bbox}\PY{p}{,} \PY{n}{gt\PYZus{}mask} \PY{o}{=}\PYZbs{}
+                 \PY{n}{modellib}\PY{o}{.}\PY{n}{load\PYZus{}image\PYZus{}gt}\PY{p}{(}\PY{n}{dataset\PYZus{}val}\PY{p}{,} \PY{n}{inference\PYZus{}config}\PY{p}{,}
+                                        \PY{n}{image\PYZus{}id}\PY{p}{,} \PY{n}{use\PYZus{}mini\PYZus{}mask}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{molded\PYZus{}images} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{modellib}\PY{o}{.}\PY{n}{mold\PYZus{}image}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{inference\PYZus{}config}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Run object detection}
+             \PY{n}{results} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{detect}\PY{p}{(}\PY{p}{[}\PY{n}{image}\PY{p}{]}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{r} \PY{o}{=} \PY{n}{results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} Compute AP}
+             \PY{n}{AP}\PY{p}{,} \PY{n}{precisions}\PY{p}{,} \PY{n}{recalls}\PY{p}{,} \PY{n}{overlaps} \PY{o}{=}\PYZbs{}
+                 \PY{n}{utils}\PY{o}{.}\PY{n}{compute\PYZus{}ap}\PY{p}{(}\PY{n}{gt\PYZus{}bbox}\PY{p}{,} \PY{n}{gt\PYZus{}class\PYZus{}id}\PY{p}{,} \PY{n}{gt\PYZus{}mask}\PY{p}{,}
+                                  \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rois}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{class\PYZus{}ids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{masks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{APs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{AP}\PY{p}{)}
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mAP: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{APs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mAP:  0.95
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

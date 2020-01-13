@@ -1,0 +1,72 @@
+
+Command:
+
+
+### 1. Visualizing the prepared data
+python visualizeDataset.py \
+ --images="data/dataset1/images_prepped_train/" \
+ --annotations="data/dataset1/annotations_prepped_train/" \
+ --n_classes=10
+
+python VisualizeZurichDataset.py \
+ --images="Data_Zurich/Image_Validation/" \
+ --annotations="Data_Zurich/Label_Validation/" \
+ --n_classes=9
+
+### 2. Training the Model
+ python  train.py \
+ --save_weights_path=weights/ex1 \
+ --train_images="data/dataset1/images_prepped_train/" \
+ --train_annotations="data/dataset1/annotations_prepped_train/" \
+ --val_images="data/dataset1/images_prepped_test/" \
+ --val_annotations="data/dataset1/annotations_prepped_test/" \
+ --n_classes=10 \
+ --input_height=320 \
+ --input_width=640 \
+ --model_name="fcn8"
+
+ python  Train_Zurich.py
+ --save_weights_path=weights/ex1 \
+ --train_images="Data_Zurich1/Image_Train/" \
+ --train_annotations="Data_Zurich1/Label_Train/" \
+ --val_images="Data_Zurich1/Image_Validation/" \
+ --val_annotations="Data_Zurich1/Label_Validation/" \
+ --n_classes=9 \
+ --input_height=256 \
+ --input_width=256 \
+ --model_name="fcn8"
+
+ python  Train_Zurich1.py \
+ --save_weights_path=weights/ex1 \
+ --train_images="Data_Zurich/Image_Train/" \
+ --train_annotations="Data_Zurich/Label_Train/" \
+ --val_images="Data_Zurich/Image_Validation/" \
+ --val_annotations="Data_Zurich/Label_Validation/" \
+ --n_classes=9 \
+ --input_height=224 \
+ --input_width=224 \
+ --model_name="fcn"
+
+
+
+### 3.Getting the predictions
+ THEANO_FLAGS=device=gpu,floatX=float32  python  predict.py \
+ --save_weights_path=weights/ex1 \
+ --epoch_number=0 \
+ --test_images="data/dataset1/images_prepped_test/" \
+ --output_path="data/predictions/" \
+ --n_classes=10 \
+ --input_height=320 \
+ --input_width=640 \
+ --model_name="fcn8"
+
+ python  Predict_Zurich.py \
+ --save_weights_path=weights/ex1 \
+ --epoch_number=0 \
+ --test_images="Data_Zurich1/Image_Test/" \
+ --test_labels="Data_Zurich1/Label_Test/" \
+ --output_path="Data_Zurich1/predictions/" \
+ --n_classes=9 \
+ --input_height=400 \
+ --input_width=400 \
+ --model_name="fcn8"
